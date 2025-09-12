@@ -1,0 +1,9 @@
+### Test User Signup
+POST http://localhost:5500/api/users/signup
+Content-Type: application/json
+
+{
+  "email": "shiny@example.com",
+  "username": "shinyShai",
+  "password": "123456"
+}
