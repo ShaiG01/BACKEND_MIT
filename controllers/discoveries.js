@@ -1,5 +1,5 @@
-import Discovery from "../models/DISCOMODEL";
-import User from "../models/USERMODEL";
+import Discovery from "../models/DISCOMODEL.js";
+import User from "../models/USERMODEL.js";
 
 
 export const createDiscovery = async (req, res) => {
