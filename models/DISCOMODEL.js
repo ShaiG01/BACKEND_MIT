@@ -6,7 +6,7 @@ const discoverySchema = new mongoose.Schema({
   location: { type: String },
   description: { type: String, default: 'No description' },
   createdAt: { type: Date, default: Date.now },
-  Tangibility:{
+  tangibility:{
     type: String,
   },
 
