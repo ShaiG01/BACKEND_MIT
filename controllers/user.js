@@ -29,3 +29,26 @@ export const signUpUser = async (req, res) => {
 };
 
 
+
+
+export const logInUser = async(req,res)=>{
+  const {email, password} = req.body
+  const checkEmail = await User.findOne({email: email})
+
+  try{
+    if(checkEmail){
+      if(checkEmail.password === password){
+        res.status(200).json({checkEmail})
+      }
+
+      else{
+        res.status(400).json({message: 'Incorrect password'})
+      }
+    }
+
+    res.status(404).json({message: 'User not found'})
+  } catch(error){
+    res.status(500).json(error)
+  }
+
+}
