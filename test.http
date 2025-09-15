@@ -1,5 +1,5 @@
 ### Test User Signup
-POST http://localhost:5500/api/users/signup
+POST https://backend-mit.onrender.com/api/users/signup
 Content-Type: application/json
 
 {
@@ -7,3 +7,29 @@ Content-Type: application/json
   "username": "shinyShai",
   "password": "123456"
 }
+
+
+###
+POST https://backend-mit.onrender.com/api/users/login
+Content-Type: application/json
+
+{
+  "email": "shiny@example.com",
+  "password": "123456"
+}
+
+
+
+###
+POST https://backend-mit.onrender.com/api/users/create
+Content-Type: application/json
+
+{
+  "title": "Hidden Waterfall",
+  "location": "Mountain Province",
+  "description": "A newly found waterfall surrounded by mossy rocks.",
+  "tangibility": "Natural",
+  "user": "shinyshai", 
+  "userId": "68c81a82f47fa2a6c0fa0f70"
+}
+

@@ -10,7 +10,11 @@ const discoverySchema = new mongoose.Schema({
     type: String,
   },
 
-  user: {
+  user:{
+    type: String
+  },
+
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
