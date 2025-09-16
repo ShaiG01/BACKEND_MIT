@@ -34,3 +34,39 @@ export const createDiscovery = async (req, res) => {
     res.status(500).json({ message: err.message || "Server error" });
   }
 };
+
+
+
+export const getTangibleDiscoveries = async (req, res) => {
+  try {
+
+    const tangibleDiscoveries = await Discovery.find({ tangibility: 'tangible' });
+
+    if (tangibleDiscoveries && tangibleDiscoveries.length > 0) {
+      return res.status(200).json({ tangibleDiscoveries });
+    }
+
+  
+    return res.status(404).json({ message: 'No tangible discoveries' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+
+export const getIntangibleDiscoveries = async (req, res) => {
+  try {
+
+    const intangibleDiscoveries = await Discovery.find({ tangibility: 'intangible' });
+
+    if (intangibleDiscoveries && intangibleDiscoveries.length > 0) {
+      return res.status(200).json({ intangibleDiscoveries });
+    }
+
+  
+    return res.status(404).json({ message: 'No intangible discoveries' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
