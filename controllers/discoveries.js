@@ -3,7 +3,7 @@ import User from "../models/USERMODEL.js";
 
 
 export const createDiscovery = async (req, res) => {
-  const { title, location, description, tangibility, user, userId } = req.body;
+  const { title, location, description, tangibility, user, userId, image} = req.body;
 
   try {
 
@@ -14,6 +14,7 @@ export const createDiscovery = async (req, res) => {
       tangibility,
       user,
       userId,
+      image,
     });
 
 

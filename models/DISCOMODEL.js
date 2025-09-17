@@ -10,6 +10,10 @@ const discoverySchema = new mongoose.Schema({
     type: String,
   },
 
+  image: {
+    type: String,
+  },
+
   user:{
     type: String
   },
