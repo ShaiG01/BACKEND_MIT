@@ -48,7 +48,7 @@ export const getTangibleDiscoveries = async (req, res) => {
     }
 
   
-    return res.status(404).json({ message: 'No tangible discoveries' });
+    return res.status(404).json([]);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -65,7 +65,7 @@ export const getIntangibleDiscoveries = async (req, res) => {
     }
 
   
-    return res.status(404).json({ message: 'No intangible discoveries' });
+    return res.status(404).json([]);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
