@@ -6,7 +6,9 @@ const app = express();
 const PORT = process.env.PORT || 5500;
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ extended: true, limit: "20mb" }));
+
 
 // Mount router BEFORE starting server
 app.use("/api/users", userRouter);
