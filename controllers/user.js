@@ -52,3 +52,38 @@ export const logInUser = async(req,res)=>{
   }
 
 }
+
+
+export const editProfile = async (req, res) => {
+  const { newUsername, newPassword, newAvatar, id } = req.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+ 
+    if (newUsername && newUsername.trim() !== "") {
+      user.username = newUsername;
+    }
+
+    if (newPassword && newPassword.trim() !== "") {
+  
+      user.password = newPassword;
+    }
+
+    if (newAvatar && newAvatar.trim() !== "") {
+  
+      user.avatar = avatar;
+    }
+
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error", error });
+  }
+};
