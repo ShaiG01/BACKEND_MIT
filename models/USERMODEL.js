@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   contactNo: { type: String, default: 'add contact information' },
-  avatar: { type: String, default: 'default' },
+  avatar: { type: String, default: 'user.png' },
 
 
   discoveries: [
