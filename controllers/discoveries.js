@@ -108,6 +108,10 @@ export const searchBarTangible = async (req, res) => {
     return res.status(400).json({ message: "Search query is required" });
   }
 
+  const TangibleList = await Discovery.find({tangibility: 'tangible'})
+
+  if(query === '' && TangibleList.length !== 0) return res.status(200).json(TangibleList)
+
   try {
     // MongoDB search
     const results = await Discovery.find({
@@ -137,6 +141,11 @@ export const searchBarInangible = async (req, res) => {
   if (!query) {
     return res.status(400).json({ message: "Search query is required" });
   }
+
+  const IntangibleList = await Discovery.find({tangibility: 'intangible'})
+
+  if(query === '' && IntangibleList.length !== 0) return res.status(200).json(IntangibleList)
+
 
   try {
     // MongoDB search
