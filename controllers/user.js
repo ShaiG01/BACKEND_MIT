@@ -55,7 +55,7 @@ export const logInUser = async(req,res)=>{
 
 
 export const editProfile = async (req, res) => {
-  const { newUsername, newPassword, newAvatar, id } = req.body;
+  const { newUsername, newPassword, newAvatar, id, newContact } = req.body;
 
   try {
     const user = await User.findById(id);
@@ -81,6 +81,11 @@ export const editProfile = async (req, res) => {
     if (newAvatar && newAvatar.trim() !== "") {
   
       user.avatar = newAvatar;
+    }
+
+    if (newContact && newContact.trim() !== "") {
+  
+      user.contactNo = newContact;
     }
 
     const updatedUser = await user.save();
