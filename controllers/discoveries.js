@@ -38,21 +38,7 @@ export const createDiscovery = async (req, res) => {
 
 
 
-export const getTangibleDiscoveries = async (req, res) => {
-  try {
 
-    const tangibleDiscoveries = await Discovery.find({ tangibility: 'tangible' });
-
-    if (tangibleDiscoveries && tangibleDiscoveries.length > 0) {
-      return res.status(200).json({ tangibleDiscoveries });
-    }
-
-  
-    return res.status(404).json([]);
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
-  }
-};
 
 
 export const getIntangibleDiscoveries = async (req, res) => {
@@ -71,3 +57,43 @@ export const getIntangibleDiscoveries = async (req, res) => {
   }
 };
 
+
+
+
+
+
+export const getTangibleDiscoveries = async (req, res) => {
+  try {
+
+    const tangibleDiscoveries = await Discovery.find({ tangibility: 'tangible' });
+
+    if (tangibleDiscoveries && tangibleDiscoveries.length > 0) {
+      return res.status(200).json({ tangibleDiscoveries });
+    }
+
+  
+    return res.status(404).json([]);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+
+export const getUserDiscoveries = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const discoveryList = await Discovery.find({ userId: id });
+
+    // Check if the array is empty
+    if (!discoveryList || discoveryList.length === 0) {
+      return res.status(404).json({ message: 'No discoveries yet.' });
+    }
+
+    // Return the discoveries
+    return res.status(200).json({ discoveries: discoveryList });
+
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
