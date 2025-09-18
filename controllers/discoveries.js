@@ -114,7 +114,7 @@ export const searchBar = async (req, res) => {
       $or: [
         { title: { $regex: query, $options: 'i' } },      
         { location: { $regex: query, $options: 'i' } },  
-        { user: { $regex: query, $options: 'i' } }
+        { description: { $regex: query, $options: 'i' } }
       ]
     });
 
