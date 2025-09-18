@@ -97,3 +97,27 @@ export const getUserDiscoveries = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+
+
+
+export const deleteDiscovery = async (req, res) => {
+  const { id, userId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(400).json({ message: 'Unable to fetch user' });
+
+    const discovery = await Discovery.findByIdAndDelete(id);
+    if (!discovery) return res.status(404).json({ message: 'Discovery not found' });
+
+    // Remove the discovery from the user's discoveries array
+    user.discoveries = user.discoveries.filter(d => d._id.toString() !== id);
+    await user.save();
+
+    return res.status(200).json({ message: 'Discovery deleted successfully' });
+
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};

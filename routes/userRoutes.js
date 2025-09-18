@@ -1,5 +1,5 @@
 import { signUpUser, logInUser, editProfile} from "../controllers/user.js";
-import { createDiscovery, getIntangibleDiscoveries, getTangibleDiscoveries, getUserDiscoveries} from "../controllers/discoveries.js";
+import { createDiscovery, getIntangibleDiscoveries, getTangibleDiscoveries, deleteDiscovery, getUserDiscoveries} from "../controllers/discoveries.js";
 import { Router } from "express";
 
 const userRouter = Router()
@@ -7,6 +7,7 @@ const userRouter = Router()
 userRouter.post('/signup', signUpUser)
 userRouter.post('/login', logInUser)
 userRouter.post('/edit', editProfile)
+userRouter.post('/delete', deleteDiscovery)
 
 userRouter.post('/get', getUserDiscoveries)
 userRouter.post('/create', createDiscovery)
