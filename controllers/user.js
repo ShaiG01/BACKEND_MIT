@@ -76,7 +76,7 @@ export const editProfile = async (req, res) => {
 
     if (newAvatar && newAvatar.trim() !== "") {
   
-      user.avatar = avatar;
+      user.avatar = newAvatar;
     }
 
     const updatedUser = await user.save();
