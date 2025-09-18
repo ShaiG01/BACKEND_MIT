@@ -101,6 +101,37 @@ export const getUserDiscoveries = async (req, res) => {
 
 
 
+export const searchBar = async (req, res) => {
+   const { query } = req.body;
+
+  if (!query) {
+    return res.status(400).json({ message: "Search query is required" });
+  }
+
+  try {
+    // MongoDB search
+    const results = await Discovery.find({
+      $or: [
+        { title: { $regex: query, $options: 'i' } },      
+        { location: { $regex: query, $options: 'i' } },  
+        { user: { $regex: query, $options: 'i' } }
+      ]
+    });
+
+    if (!results || results.length === 0) {
+      return res.status(404).json({ message: 'No discoveries found' });
+    }
+
+    return res.status(200).json(results);
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
+}
+
+
+
 export const deleteDiscovery = async (req, res) => {
   const { id, userId } = req.body;
 
