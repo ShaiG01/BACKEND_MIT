@@ -102,29 +102,24 @@ export const getUserDiscoveries = async (req, res) => {
 
 
 export const searchBarTangible = async (req, res) => {
-   const { query } = req.body;
-
-  if (!query) {
-    return res.status(400).json({ message: "Search query is required" });
-  }
-
-  const TangibleList = await Discovery.find({tangibility: 'tangible'})
-
-  if(query === '' && TangibleList.length !== 0) return res.status(200).json(TangibleList)
+  const { query = "" } = req.body; // default to empty string
 
   try {
-    // MongoDB search
-    const results = await Discovery.find({
-      tangibility: 'tangible',
-      $or: [
-        { title: { $regex: query, $options: 'i' } },      
-        { location: { $regex: query, $options: 'i' } },  
+    let searchCondition = { tangibility: 'tangible' };
+
+    // Only add $or search if query is not empty
+    if (query.trim() !== "") {
+      searchCondition.$or = [
+        { title: { $regex: query, $options: 'i' } },
+        { location: { $regex: query, $options: 'i' } },
         { description: { $regex: query, $options: 'i' } }
-      ]
-    });
+      ];
+    }
+
+    const results = await Discovery.find(searchCondition);
 
     if (!results || results.length === 0) {
-      return res.status(404).json({ message: 'No discoveries found' });
+      return res.status(404).json({ message: 'No tangible discoveries found' });
     }
 
     return res.status(200).json(results);
@@ -135,31 +130,25 @@ export const searchBarTangible = async (req, res) => {
   }
 }
 
-export const searchBarInangible = async (req, res) => {
-   const { query } = req.body;
 
-  if (!query) {
-    return res.status(400).json({ message: "Search query is required" });
-  }
-
-  const IntangibleList = await Discovery.find({tangibility: 'intangible'})
-
-  if(query === '' && IntangibleList.length !== 0) return res.status(200).json(IntangibleList)
-
+export const searchBarIntangible = async (req, res) => {
+  const { query = "" } = req.body;
 
   try {
-    // MongoDB search
-    const results = await Discovery.find({
-      tangibility: 'intangible',
-      $or: [
-        { title: { $regex: query, $options: 'i' } },      
-        { location: { $regex: query, $options: 'i' } },  
+    let searchCondition = { tangibility: 'intangible' };
+
+    if (query.trim() !== "") {
+      searchCondition.$or = [
+        { title: { $regex: query, $options: 'i' } },
+        { location: { $regex: query, $options: 'i' } },
         { description: { $regex: query, $options: 'i' } }
-      ]
-    });
+      ];
+    }
+
+    const results = await Discovery.find(searchCondition);
 
     if (!results || results.length === 0) {
-      return res.status(404).json({ message: 'No discoveries found' });
+      return res.status(404).json({ message: 'No intangible discoveries found' });
     }
 
     return res.status(200).json(results);
@@ -169,7 +158,6 @@ export const searchBarInangible = async (req, res) => {
     return res.status(500).json({ message: 'Server error', error: err.message });
   }
 }
-
 
 
 export const deleteDiscovery = async (req, res) => {
