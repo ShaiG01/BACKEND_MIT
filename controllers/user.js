@@ -60,7 +60,10 @@ export const editProfile = async (req, res) => {
 
   try {
     const user = await User.findById(id);
+    const checkUsername = await User.findOne({username: newUsername})
     const discoveries = await Discovery.find({userId: id})
+
+    if(checkUsername) return res.status(401).json({message: 'Username already exists'})
 
     if(discoveries.length !== 0 && newUsername.trim() !== ''){
       discoveries.map(discovery => discovery.user = newUsername)
