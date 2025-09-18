@@ -1,4 +1,5 @@
 import User from "../models/USERMODEL.js";
+import Discovery from "../models/DISCOMODEL.js";
 
 export const signUpUser = async (req, res) => {
   const { email, username, password } = req.body;
@@ -59,6 +60,11 @@ export const editProfile = async (req, res) => {
 
   try {
     const user = await User.findById(id);
+    const discoveries = await Discovery.find({userId: id})
+
+    if(discoveries.length !== 0 && newUsername.trim() !== ''){
+      discoveries.map(discovery => discovery.user = newUsername)
+    }
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
