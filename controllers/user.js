@@ -65,7 +65,7 @@ export const editProfile = async (req, res) => {
     }
 
  
-    if (newUsername && newUsername.trim() !== "") {
+    if (newUsername && newUsername.trim() !== "" && newUsername.length < 15) {
       user.username = newUsername;
     }
 
