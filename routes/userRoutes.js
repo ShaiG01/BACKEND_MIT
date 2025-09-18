@@ -1,4 +1,4 @@
-import { signUpUser, logInUser, editProfile} from "../controllers/user.js";
+import { signUpUser, logInUser, editProfile, fetchUserProfile} from "../controllers/user.js";
 import { createDiscovery, getIntangibleDiscoveries, getTangibleDiscoveries, deleteDiscovery, getUserDiscoveries} from "../controllers/discoveries.js";
 import { Router } from "express";
 
@@ -8,6 +8,7 @@ userRouter.post('/signup', signUpUser)
 userRouter.post('/login', logInUser)
 userRouter.post('/edit', editProfile)
 userRouter.post('/delete', deleteDiscovery)
+userRouter.post('/findUser', fetchUserProfile)
 
 userRouter.post('/get', getUserDiscoveries)
 userRouter.post('/create', createDiscovery)
