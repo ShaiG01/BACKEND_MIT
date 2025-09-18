@@ -69,6 +69,10 @@ export const editProfile = async (req, res) => {
       user.username = newUsername;
     }
 
+    if(newUsername.length > 15){
+      return res.status(400).json({message: 'Username must not exceed 15 characters'})
+    }
+
     if (newPassword && newPassword.trim() !== "") {
   
       user.password = newPassword;
